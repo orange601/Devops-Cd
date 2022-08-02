@@ -6,3 +6,7 @@
 - 카나리(Canary Release) 방식
 
 
+## Docker ##
+- https://www.youtube.com/watch?v=Bhzz9E3xuXY&t=350s
+- https://pyrasis.com/Docker/Docker-HOWTO
+- https://hub.docker.com/_/ubuntu?tab=tags ( 우분투를 예시로 든 image 검색 )
