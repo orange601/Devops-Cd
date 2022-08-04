@@ -13,3 +13,4 @@
 
 #### docker 실행 ####
 - docker run -i -t containerName /bin/bash ( 예제에서는 우분투를 실행했음 )
+- run 과 start 의 차이는 run은 도커 진입 start는 실행만 하고 docker에 진입은하지 않음
