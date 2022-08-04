@@ -10,3 +10,6 @@
 - https://www.youtube.com/watch?v=Bhzz9E3xuXY&t=350s
 - https://pyrasis.com/Docker/Docker-HOWTO
 - https://hub.docker.com/_/ubuntu?tab=tags ( 우분투를 예시로 든 image 검색 )
+
+#### docker 실행 ####
+- docker run -i -t containerName /bin/bash ( 예제에서는 우분투를 실행했음 )
