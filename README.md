@@ -28,3 +28,5 @@ $ docker cp prod1:/etc/nginx/conf.d/ c:/devops/share
 ````
 $ docker cp c:/devops/share/conf.d/ prod1:/etc/nginx/
 ````
+컨테이너 
+docker run --name webserver(컨테이너 이름) -p 8080:80 -d  nginx(이미지:버전)
