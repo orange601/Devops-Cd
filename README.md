@@ -35,3 +35,5 @@ $ docker cp c:/devops/share/conf.d/ prod1:/etc/nginx/
 ````
 $ docker run --name webserver(컨테이너 이름) -p 8080:80 -d  nginx(이미지:버전)
 ````
+컨테이너와 컨테이너를 연결하기
+--link <연결할 컨테이너명>:<컨테이너 연결에 사용할 이름>
