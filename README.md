@@ -21,10 +21,10 @@
 
 #### 명령어 ####
 - 파일복사 ( container to host )
-````cmd
-$docker cp prod1:/etc/nginx/conf.d/ c:/devops/share
+````
+$ docker cp prod1:/etc/nginx/conf.d/ c:/devops/share
 ````
 - 파일복사 ( host to container )
-````cmd
-$docker cp c:/devops/share/conf.d/ prod1:/etc/nginx/
+````
+$ docker cp c:/devops/share/conf.d/ prod1:/etc/nginx/
 ````
