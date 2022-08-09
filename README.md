@@ -18,3 +18,13 @@
 - image는 하나고 여러개의 container의 종속을 만들 수 
 
 ![2022-08-08 14 03 14](https://user-images.githubusercontent.com/24876345/183343019-30da31a2-073d-4e69-a57b-69ed579d1134.png)
+
+#### 명령어 ####
+- 파일복사 ( container to host )
+````docker
+docker cp prod1:/etc/nginx/conf.d/ c:/devops/share
+````
+- 파일복사 ( host to container )
+````docker
+docker cp c:/devops/share/conf.d/ prod1:/etc/nginx/
+````
