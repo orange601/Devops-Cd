@@ -29,12 +29,14 @@ CMD ["java", "-jar", "app1.jar"]
 ````
 FROM adoptopenjdk/openjdk11:alpine-jre
 
+ENV PROFILE prod1
+
 ADD jar/*.jar webservice/app.jar
-ADD properties/*.properties /webservice/config/application-prod1.properties
+ADD properties/application-${PROFILE}.properties /webservice/config/application-${PROFILE}.properties
 
 EXPOSE 60001
 
-ENTRYPOINT ["java", "-Dspring.profiles.active=prod1", "-jar", "webservice/app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-Dspring.config.location=/webservice/config/application-${PROFILE}.properties", "-jar", "webservice/app.jar"]
 ````
 
 ### 2. image 생성 ###
