@@ -10,7 +10,7 @@
     - 아무위치에 생성해도 상관없다.
     - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
 
-설명을 위한 SAMPLE
+#### DOCKERFILE-SAMPLE1 ####
 ````cmd
 # docker hub에서 사용할 image
 FROM adoptopenjdk/openjdk11:alpine-jre
@@ -25,7 +25,7 @@ EXPOSE 8888
 CMD ["java", "-jar", "app1.jar"]
 ````
 
-내가 작업한 dockerfile
+#### DOCKERFILE-SAMPLE2 ####
 ````
 FROM adoptopenjdk/openjdk11:alpine-jre
 
@@ -39,11 +39,27 @@ EXPOSE 60001
 ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-Dspring.config.location=/webservice/config/application-${PROFILE}.properties", "-jar", "webservice/app.jar"]
 ````
 
+#### DOCKERFILE-SAMPLE3 ####
+````
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+ADD jar/*.jar webservice/app.jar
+ADD properties/*.properties /webservice/config/
+
+EXPOSE 60001
+
+
+ENTRYPOINT ["java", "-Dspring.config.location=/webservice/config/", "-jar", "webservice/app.jar"]
+````
+
 ### 2. image 생성 ###
-        - docker build --tag myjava:0.1 .
+        - SAMPLE3을 이용해 이미지를 만든다.
+        - docker build --tag jre11:alpine-jre .
+        - ** 끝에 마침표 필수 **
         - 이미지이름:태그(버전)
 
 ### 3. container 실행 ###
+        - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" --name was1 -p 60002:50001 jre11:alpine-jre
         - $ docker run --name webserver(컨테이너 이름) -p 50001:8080 -d  jre11:alpine-jre(이미지:버전)
         - p는 포트를 의미
         - d는 백그라운드에서 실행
