@@ -6,10 +6,11 @@
 - 카나리(Canary Release) 방식
 
 ## Docker ##
-1. Dockerfile생성 ( dockerfile을 이용해 docker 이미지 생성한다. )
+### 1. Dockerfile생성 ( dockerfile을 이용해 docker 이미지 생성한다. ) ###
     - 아무위치에 생성해도 상관없다.
     - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
 
+SAMPLE
 ````cmd
 # docker hub에서 사용할 image
 FROM adoptopenjdk/openjdk11:alpine-jre
@@ -24,6 +25,26 @@ EXPOSE 8888
 CMD ["java", "-jar", "app1.jar"]
 ````
 
+실제 (ADD 뒤에 역슬래쉬가 아니고 슬래시를 썼더니 오류가 났다 )
+````
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+ADD C:\orange\dockers\jar\*.jar /jar/app.jar
+
+EXPOSE 50001
+
+CMD ["java", "-jar", "/jar/app.jar"]
+````
+
+### 2. image 생성 ###
+        - docker build --tag myjava:0.1 .
+        - 이미지이름:태그(버전)
+
+### 3. container 실행 ###
+        - $ docker run --name webserver(컨테이너 이름) -p 50001:8080 -d  jre11:alpine-jre(이미지:버전)
+        - p는 포트를 의미
+        - d는 백그라운드에서 실행
+        - 8080:80 앞에 포트는 host 뒤에 포트는 container 포트
 
 
 #### DOCKER 설명 ####
