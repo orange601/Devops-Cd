@@ -2,11 +2,31 @@
 
 ## 무중단 배포 방식 ##
 - 롤링(Rolling Update) 방식
-- 블루 그린(Blue-Green Deployment) 방식
+- **블루 그린(Blue-Green Deployment) 방식**
 - 카나리(Canary Release) 방식
 
-
 ## Docker ##
+1. Dockerfile생성 ( dockerfile을 이용해 docker 이미지 생성한다. )
+    - 아무위치에 생성해도 상관없다.
+    - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
+
+````cmd
+# docker hub에서 사용할 image
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+# 앞에는 host의 jar 경로와 파일명 뒤에는 container 경로와 파일명 ( 경로가 없으면 root 위치에 저장된다. )
+ADD *.jar app1.jar
+
+# HOST의 포트
+EXPOSE 8888
+
+# container가 올라가면 실행될 명령어
+CMD ["java", "-jar", "app1.jar"]
+````
+
+
+
+#### DOCKER 설명 ####
 - https://www.youtube.com/watch?v=Bhzz9E3xuXY&t=350s
 - https://pyrasis.com/Docker/Docker-HOWTO
 - https://hub.docker.com/_/ubuntu?tab=tags ( 우분투를 예시로 든 image 검색 )
