@@ -15,7 +15,7 @@ SAMPLE
 # docker hub에서 사용할 image
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-# 앞에는 host의 jar 경로와 파일명 뒤에는 container 경로와 파일명 ( 경로가 없으면 root 위치에 저장된다. )
+# 앞에는 host의 jar명 뒤에는 container명
 ADD *.jar app1.jar
 
 # HOST의 포트
@@ -25,15 +25,15 @@ EXPOSE 8888
 CMD ["java", "-jar", "app1.jar"]
 ````
 
-실제 (ADD 뒤에 역슬래쉬가 아니고 슬래시를 썼더니 오류가 났다 )
+현재
 ````
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-ADD C:\orange\dockers\jar\*.jar /jar/app.jar
+ADD *.jar /app.jar
 
 EXPOSE 50001
 
-CMD ["java", "-jar", "/jar/app.jar"]
+CMD ["java", "-jar", "app.jar"]
 ````
 
 ### 2. image 생성 ###
