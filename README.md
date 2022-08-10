@@ -60,6 +60,7 @@ ENTRYPOINT ["java", "-Dspring.config.location=/webservice/config/", "-jar", "web
 
 ### 3. container 실행 ###
         - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" --name was1 -p 60002:50001 jre11:alpine-jre
+        - ( -e JAVA_OPTS="\-Dspring.config.location=/configurations/application.yaml"\ )
         - $ docker run --name webserver(컨테이너 이름) -p 50001:8080 -d  jre11:alpine-jre(이미지:버전)
         - p는 포트를 의미
         - d는 백그라운드에서 실행
