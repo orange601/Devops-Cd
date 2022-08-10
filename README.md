@@ -10,7 +10,7 @@
     - 아무위치에 생성해도 상관없다.
     - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
 
-SAMPLE
+설명을 위한 SAMPLE
 ````cmd
 # docker hub에서 사용할 image
 FROM adoptopenjdk/openjdk11:alpine-jre
@@ -25,15 +25,16 @@ EXPOSE 8888
 CMD ["java", "-jar", "app1.jar"]
 ````
 
-현재
+내가 작업한 dockerfile
 ````
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-ADD *.jar /app.jar
+ADD jar/*.jar webservice/app.jar
+ADD properties/*.properties /webservice/config/application-prod1.properties
 
-EXPOSE 50001
+EXPOSE 60001
 
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod1", "-jar", "webservice/app.jar"]
 ````
 
 ### 2. image 생성 ###
