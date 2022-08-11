@@ -76,7 +76,7 @@
         proxy_pass http://was1:50001; 
       }
     ````
-    - was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! 확실하게 해둘것!
+    - **was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! 확실하게 해둘것!**
     - nginx -s reload
       
 #### DOCKER 설명 ####
