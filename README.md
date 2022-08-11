@@ -46,10 +46,7 @@ FROM adoptopenjdk/openjdk11:alpine-jre
 ADD jar/*.jar webservice/app.jar
 ADD properties/*.properties /webservice/config/
 
-EXPOSE 60001
-
-
-ENTRYPOINT ["java", "-Dspring.config.location=/webservice/config/", "-jar", "webservice/app.jar"]
+ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
 ````
 
 ### 2. image 생성 ###
@@ -59,9 +56,7 @@ ENTRYPOINT ["java", "-Dspring.config.location=/webservice/config/", "-jar", "web
         - 이미지이름:태그(버전)
 
 ### 3. container 실행 ###
-        - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" --name was1 -p 60002:50001 jre11:alpine-jre
-        - ( -e JAVA_OPTS="\-Dspring.config.location=/configurations/application.yaml"\ )
-        - $ docker run --name webserver(컨테이너 이름) -p 50001:8080 -d  jre11:alpine-jre(이미지:버전)
+        - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" -e "SPRING_CONFIG_LOCATION=/webservice/config/" --name was1 -p 60001:50001 jre11:alpine-jre
         - p는 포트를 의미
         - d는 백그라운드에서 실행
         - 8080:80 앞에 포트는 host 뒤에 포트는 container 포트
