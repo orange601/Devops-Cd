@@ -10,7 +10,7 @@
     - 아무위치에 생성해도 상관없다.
     - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
 
-#### DOCKERFILE-SAMPLE1 ####
+#### DOCKERFILE-SAMPLE-1 ####
 ````cmd
 # docker hub에서 사용할 image
 FROM adoptopenjdk/openjdk11:alpine-jre
@@ -25,7 +25,7 @@ EXPOSE 8888
 CMD ["java", "-jar", "app1.jar"]
 ````
 
-#### DOCKERFILE-SAMPLE2 ####
+#### DOCKERFILE-SAMPLE-2 ####
 ````
 FROM adoptopenjdk/openjdk11:alpine-jre
 
@@ -39,7 +39,7 @@ EXPOSE 60001
 ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-Dspring.config.location=/webservice/config/application-${PROFILE}.properties", "-jar", "webservice/app.jar"]
 ````
 
-#### DOCKERFILE-SAMPLE3 ####
+#### DOCKERFILE-SAMPLE-3 ####
 ````
 FROM adoptopenjdk/openjdk11:alpine-jre
 
@@ -49,7 +49,7 @@ ADD properties/*.properties /webservice/config/
 ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
 ````
 
-### 2. image 생성 ###
+### 2. JDK image 생성 ###
         - SAMPLE3을 이용해 이미지를 만든다.
         - docker build --tag jre11:alpine-jre .
         - **끝에 마침표 필수**
@@ -59,18 +59,25 @@ ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
         - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" -e "SPRING_CONFIG_LOCATION=/webservice/config/" --name was1 -p 60001:50001 jre11:alpine-jre
         - p는 포트를 의미
         - d는 백그라운드에서 실행
-        - 8080:80 앞에 포트는 host 뒤에 포트는 container 포트
+        - 60001:50001 앞에 포트는 host 뒤에 포트는 container 포트
         
 ### 4. nginx 이미지 설치 ###
-- docker pull nginx:latest
-- 최신버전 설치
+        - docker pull nginx:latest
+        - 최신버전 설치
 
-### 5. niginx 실행 ###
-- spring container와 연동한다.
-- docker의 link 옵션을 이용해서 연결한다.
-- docker run 명령에서 연결 옵션은 --link <컨테이너 이름>:<별칭> 형식이다.
+### 5. nginx 실행 ###
+        - docker run 명령에서 container 간 연결 옵션은 --link <컨테이너 이름>:<별칭> 형식이다.
+        - $ docker run --name proxy -p 9090:80 --link was1:was1 nginx
 
-
+### 6. nginx proxy 설정하기 ###
+        - /etc/nginx/conf.d/default.conf 수정
+        ````
+        location / {
+            proxy_pass http://was1:50001; 
+        }
+        ````
+- **was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! **
+        
 #### DOCKER 설명 ####
 - https://www.youtube.com/watch?v=Bhzz9E3xuXY&t=350s
 - https://pyrasis.com/Docker/Docker-HOWTO
