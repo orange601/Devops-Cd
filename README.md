@@ -50,34 +50,34 @@ ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
 ````
 
 2. **JDK image 생성**
-        - SAMPLE3을 이용해 이미지를 만든다.
-        - docker build --tag jre11:alpine-jre .
-        - **끝에 마침표 필수**
-        - 이미지이름:태그(버전)
+    - SAMPLE3을 이용해 이미지를 만든다.
+    - docker build --tag jre11:alpine-jre .
+    - **끝에 마침표 필수**
+    - 이미지이름:태그(버전)
 
 3. **container 실행**
-        - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" -e "SPRING_CONFIG_LOCATION=/webservice/config/" --name was1 -p 60001:50001 jre11:alpine-jre
-        - p는 포트를 의미
-        - d는 백그라운드에서 실행
-        - 60001:50001 앞에 포트는 host 뒤에 포트는 container 포트
+    - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" -e "SPRING_CONFIG_LOCATION=/webservice/config/" --name was1 -p 60001:50001 jre11:alpine-jre
+    - p는 포트를 의미
+    - d는 백그라운드에서 실행
+    - 60001:50001 앞에 포트는 host 뒤에 포트는 container 포트
         
 4. **nginx 이미지 설치**
-        - docker pull nginx:latest
-        - 최신버전 설치
+    - docker pull nginx:latest
+    - 최신버전 설치
 
 5. **nginx 실행**
-        - docker run 명령에서 container 간 연결 옵션은 --link <컨테이너 이름>:<별칭> 형식이다.
-        - $ docker run --name proxy -p 9090:80 --link was1:was1 nginx
+    - docker run 명령에서 container 간 연결 옵션은 --link <컨테이너 이름>:<별칭> 형식이다.
+    - $ docker run --name proxy -p 9090:80 --link was1:was1 nginx
 
 6. **nginx proxy 설정하기**
-        - /etc/nginx/conf.d/default.conf 수정
-         ````cmd
-         location / {
-            proxy_pass http://was1:50001; 
-         }
-         ````
-        - was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! 확실하게 해둘것!
-        - 
+    - /etc/nginx/conf.d/default.conf 수정
+    ````cmd
+      location / {
+        proxy_pass http://was1:50001; 
+      }
+    ````
+    - was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! 확실하게 해둘것!
+    - nginx -s reload
       
 #### DOCKER 설명 ####
 - https://www.youtube.com/watch?v=Bhzz9E3xuXY&t=350s
