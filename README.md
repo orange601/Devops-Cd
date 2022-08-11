@@ -6,7 +6,7 @@
 - 카나리(Canary Release) 방식
 
 ## Docker ##
-### 1. Dockerfile생성 ( dockerfile을 이용해 docker 이미지 생성한다. ) ###
+1. **Dockerfile생성 ( dockerfile을 이용해 docker 이미지 생성한다. )**
     - 아무위치에 생성해도 상관없다.
     - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
 
@@ -49,27 +49,27 @@ ADD properties/*.properties /webservice/config/
 ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
 ````
 
-### 2. JDK image 생성 ###
+2. **JDK image 생성**
         - SAMPLE3을 이용해 이미지를 만든다.
         - docker build --tag jre11:alpine-jre .
         - **끝에 마침표 필수**
         - 이미지이름:태그(버전)
 
-### 3. container 실행 ###
+3. **container 실행**
         - $ docker run -e "SPRING_PROFILES_ACTIVE=prod1" -e "SPRING_CONFIG_LOCATION=/webservice/config/" --name was1 -p 60001:50001 jre11:alpine-jre
         - p는 포트를 의미
         - d는 백그라운드에서 실행
         - 60001:50001 앞에 포트는 host 뒤에 포트는 container 포트
         
-### 4. nginx 이미지 설치 ###
+4. **nginx 이미지 설치**
         - docker pull nginx:latest
         - 최신버전 설치
 
-### 5. nginx 실행 ###
+5. **nginx 실행**
         - docker run 명령에서 container 간 연결 옵션은 --link <컨테이너 이름>:<별칭> 형식이다.
         - $ docker run --name proxy -p 9090:80 --link was1:was1 nginx
 
-### 6. nginx proxy 설정하기 ###
+6. **nginx proxy 설정하기**
         - /etc/nginx/conf.d/default.conf 수정
          ````cmd
          location / {
