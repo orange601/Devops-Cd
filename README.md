@@ -52,7 +52,7 @@ ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
 ### 2. image 생성 ###
         - SAMPLE3을 이용해 이미지를 만든다.
         - docker build --tag jre11:alpine-jre .
-        - ** 끝에 마침표 필수 **
+        - **끝에 마침표 필수**
         - 이미지이름:태그(버전)
 
 ### 3. container 실행 ###
