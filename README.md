@@ -60,6 +60,15 @@ ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
         - p는 포트를 의미
         - d는 백그라운드에서 실행
         - 8080:80 앞에 포트는 host 뒤에 포트는 container 포트
+        
+### 4. nginx 이미지 설치 ###
+- docker pull nginx:latest
+- 최신버전 설치
+
+### 5. niginx 실행 ###
+- spring container와 연동한다.
+- docker의 link 옵션을 이용해서 연결한다.
+- docker run 명령에서 연결 옵션은 --link <컨테이너 이름>:<별칭> 형식이다.
 
 
 #### DOCKER 설명 ####
