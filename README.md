@@ -71,13 +71,14 @@ ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
 
 ### 6. nginx proxy 설정하기 ###
         - /etc/nginx/conf.d/default.conf 수정
-        ````
-        location / {
+         ````cmd
+         location / {
             proxy_pass http://was1:50001; 
-        }
-        ````
-- **was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! **
-        
+         }
+         ````
+        - was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! 확실하게 해둘것!
+        - 
+      
 #### DOCKER 설명 ####
 - https://www.youtube.com/watch?v=Bhzz9E3xuXY&t=350s
 - https://pyrasis.com/Docker/Docker-HOWTO
