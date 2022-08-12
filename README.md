@@ -70,14 +70,21 @@
     - $ docker run --name proxy -p 9090:80 --link was1:was1 nginx
 
 6. **nginx proxy 설정하기**
-    - /etc/nginx/conf.d/default.conf 수정
+    - /etc/nginx/conf.d/default.conf
     ````cmd
+      include /etc/nginx/conf.d/service-url.inc;
       location / {
-        proxy_pass http://was1:50001; 
+        resolver 127.0.0.11;
+        proxy_pass $service_url;
       }
     ````
+    - resolver 확인 cat /etc/resolv.conf
     - **was1은 컨테이너명, 50001은 호스트 port가 아닌 "내부" local port 이다! 확실하게 해둘것!**
     - nginx -s reload
+    
+7. **service-url.inc 설정하기**
+    - include /etc/nginx/conf.d/service-url.inc;
+    - set $service_url http://was1:50001;
       
 #### DOCKER 설명 ####
 - https://www.youtube.com/watch?v=Bhzz9E3xuXY&t=350s
