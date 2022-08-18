@@ -5,7 +5,35 @@
 - **블루 그린(Blue-Green Deployment) 방식**
 - 카나리(Canary Release) 방식
 
-## Docker ##
+## Docker-compose 이용한 설정 ##
+1. **네트워크 생성**
+    - docker network create was-network
+    - container간의 통신을 위해 network를 생성한다.
+
+2. **네트워크 조회**
+    - docker network ls
+
+3. **nginx이미지를 생성할 nginx compose 생성**
+    - docker-compose.yml
+    ````yml
+    version: '3.1'
+
+    services:
+      nginx-proxy:
+        image: nginx:latest
+        container_name: nginx-proxy
+        ports:
+          - "30000:80"
+        volumes:
+          - ../volume/conf:/etc/nginx/conf.d/
+
+    networks:
+      default:
+        external:
+          name: was-network
+    ````
+
+## Dockerfile 이용한 설정 ##
 1. **Dockerfile생성 ( dockerfile을 이용해 docker 이미지 생성한다. )**
     - 아무위치에 생성해도 상관없다.
     - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
