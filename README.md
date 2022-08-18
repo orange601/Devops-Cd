@@ -14,6 +14,8 @@
     - docker network ls
 
 3. **nginx이미지를 생성할 nginx compose 생성**
+    - docker-compose -p proxy-server up
+    - p: 프로젝트 이름
     - docker-compose.yml
     ````yml
     version: '3.1'
