@@ -14,8 +14,11 @@
     - docker network ls
 
 3. **nginx이미지를 생성할 nginx compose 생성**
+    - docker-compose up ( 기본명령어 )
     - docker-compose -p proxy-server up
-    - p: 프로젝트 이름
+    - p: 프로젝트 이름 
+    - 같은 이름의 프로젝트이면 container가 같은 그룹으로 생성된다. 
+    - 프로젝트 이름을 설정하지않고 기본명령어만 사용할 경우 compose 그룹으로 생성된다.
     - docker-compose.yml
     ````yml
     version: '3.1'
