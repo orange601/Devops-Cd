@@ -16,7 +16,9 @@
 3. **nginx이미지를 생성할 nginx compose 생성**
     - docker-compose up ( 기본명령어 )
     - docker-compose -p proxy-server up
+    - docker-compose -p dtd -f ./docker-compose.blue.yml up -d
     - p: 프로젝트 이름 
+    - f: docker-compose.yml를 설정 파일로 사용합니다. 다른 이름이나 경로의 파일을 Docker Compose 설정 파일로 사용하고 싶다면 -f 옵션으로 명시를 해줍니다.
     - 같은 이름의 프로젝트이면 container가 같은 그룹으로 생성된다. 
     - 프로젝트 이름을 설정하지않고 기본명령어만 사용할 경우 compose 그룹으로 생성된다.
     - docker-compose.yml
