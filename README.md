@@ -6,6 +6,15 @@
 - 카나리(Canary Release) 방식
 
 ## Docker-compose 이용한 설정 ##
+### Scenario ###
+1. docker-compose 통한 Nginx 설치
+2. Nginx 브라우저 접속 확인
+3. default.conf 파일 수정 - service-url.inc 파일 생성
+4. 네트워크생성
+5. docker-compose 통한 java-spring image 생성
+6. 접속 확인
+7. deploy.sh 작성
+
 1. **네트워크 생성**
     - docker network create was-network
     - container간의 통신을 위해 network를 생성한다.
