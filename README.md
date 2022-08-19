@@ -15,6 +15,7 @@
 6. 접속 확인
 7. deploy.sh 작성
 
+### 설명 ###
 1. **네트워크 생성**
     - docker network create was-network
     - container간의 통신을 위해 network를 생성한다.
