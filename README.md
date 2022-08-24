@@ -15,6 +15,13 @@
 6. 접속 확인
 7. deploy.sh 작성
 
+### 주의사항 ###
+1. 웹훅
+    - http://locahost:8080를 입력하시면 정상적으로 동작하지 않습니다.
+    - http://public-ip:8080 같이 공개 IP를 사용하는 경우에도 정상적으로 동작하지 않습니다.
+    - ngrok 어플리케이션을 통해 외부에서 접근할 수 있는 도메인을 사용합니다.
+    - Content type - application/json 타입을 사용합니다.
+
 ### 설명 ###
 1. **네트워크 생성**
     - docker network create was-network
