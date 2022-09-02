@@ -1,20 +1,17 @@
 # CD #
 - 배포 자동화
 - 지속적인 서비스 제공(Continuous Delivery) 또는 지속적인 배포(Continuous Deployment)를 의미
+- Build 후 배포 과정만을 설명한다.
 
 ## 목표 ##
 - **블루 그린(Blue-Green Deployment) 배포**
-- Build 후 배포 과정을 설명한다.
-- Jenkins에서 gradle build를 통한 jar파일 생성 후 deploy.sh파일을 jenkins가 실행시켜 Nginx와 연결된 WAS(Springboot)를 변경시켜준다.
+- Jenkins의 webhook과 build 과정은 CI에서 관리한다.
 
 ## Scenario ##
-1. docker-compose 통한 Nginx 설치
-2. Nginx 브라우저 접속 확인
-3. default.conf 파일 수정 - service-url.inc 파일 생성
-4. 네트워크생성
-5. docker-compose 통한 jdk 이미지 및 container 생성
-6. jdk container 접속 확인
-7. deploy.sh 작성
+1. bash를 명령어를 통한 deploy.sh 파일 실행
+2. service-url.inc의 URL과 port가 변경된다.
+3. docker-compose.blue.yml 과 docker-compose.green.yml이 번갈아가면서 실행된다.
+4. Nginx로 접속시 blue 혹은 green으로 접속한다.
 
 ## 설치시 주의 사항 및 Troubleshooting시 가장먼저 확인해야 되는 부분 ##
 - Nginx 확인 
