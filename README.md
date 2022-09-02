@@ -5,6 +5,7 @@
 
 ## 목표 ##
 - **블루 그린(Blue-Green Deployment) 배포**
+- Docker에 jenkins와 java 설치 후 연동하는것이 목표
 - Jenkins의 webhook과 build 과정은 CI에서 관리한다.
 - [Jenkins를 통한 DEVOPS CI](https://github.com/orange601/devops-ci)
 
