@@ -148,44 +148,7 @@ services:
     - 아무위치에 생성해도 상관없다.
     - 현재 host는 windows이므로 C:\orange\dockers\dockerfiles\java 여기에 생성했다.
 
-        #### DOCKERFILE-SAMPLE-1 ####
-        ````cmd
-        # docker hub에서 사용할 image
-        FROM adoptopenjdk/openjdk11:alpine-jre
 
-        # 앞에는 host의 jar명 뒤에는 container명
-        ADD *.jar app1.jar
-
-        # HOST의 포트
-        EXPOSE 8888
-
-        # container가 올라가면 실행될 명령어
-        CMD ["java", "-jar", "app1.jar"]
-        ````
-
-        #### DOCKERFILE-SAMPLE-2 ####
-        ````
-        FROM adoptopenjdk/openjdk11:alpine-jre
-
-        ENV PROFILE prod1
-
-        ADD jar/*.jar webservice/app.jar
-        ADD properties/application-${PROFILE}.properties /webservice/config/application-${PROFILE}.properties
-
-        EXPOSE 60001
-
-        ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-Dspring.config.location=/webservice/config/application-${PROFILE}.properties", "-jar", "webservice/app.jar"]
-        ````
-
-        #### DOCKERFILE-SAMPLE-3 ####
-        ````
-        FROM adoptopenjdk/openjdk11:alpine-jre
-
-        ADD jar/*.jar webservice/app.jar
-        ADD properties/*.properties /webservice/config/
-
-        ENTRYPOINT ["java", "-jar", "webservice/app.jar"]
-        ````
 
 2. **JDK image 생성**
     - SAMPLE3을 이용해 이미지를 만든다.
