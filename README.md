@@ -22,7 +22,8 @@
 7. deploy.sh 작성
 
 ## Nginx ##
-### docker-compose.yml 을 이용한 Nginx 설치 ### 
+
+### 1. docker-compose.yml 을 이용한 Nginx 설치 ### 
 - docker-compose 명령을 이용해서 nginx 이미지와 container 설치
 - docker-compose.yml 위치에서 아래 명령어를 실행한다.
 ````docker
@@ -30,9 +31,22 @@ $ docker-compose -p project_name up -d
 ````
 - p: 프로젝트명 ( docker에서 관리할때 사용 )
 - f: 파일이름이 docker-compose.yml이 아닐 경우나 파일경로가 현재 경로에 없을 경우 사용한다.
+- 예) docker-compose -p dtd -f //docker-compose.blue.yml up -d
 - d: background 실행
 
-## Docker-compose 이용한 설정 ##
+### 2. Nginx Proxy 설정 ### 
+- 
+
+
+
+
+
+
+
+
+
+
+
 
 ### 주의사항 ###
 1. 웹훅
