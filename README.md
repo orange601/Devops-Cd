@@ -7,11 +7,6 @@
 - Build 후 배포 과정을 설명한다.
 - Jenkins에서 gradle build를 통한 jar파일 생성 후 deploy.sh파일을 jenkins가 실행시켜 Nginx와 연결된 WAS(Springboot)를 변경시켜준다.
 
-## 무중단 배포 종류 ##
-- 롤링(Rolling Update) 방식
-- 블루 그린(Blue-Green Deployment) 방식
-- 카나리(Canary Release) 방식
-
 ## Scenario ##
 1. docker-compose 통한 Nginx 설치
 2. Nginx 브라우저 접속 확인
