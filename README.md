@@ -63,12 +63,12 @@ $  cat /etc/resolv.conf
 
 #### 같은위치에 service-url.inc 파일생성 ###
 ````
-set $service_url http://was-blue-prod1:50001;
+set $service_url http://was-blue-prod1:58001;
 ````
 1. http 뒤에 container 이름을 사용한다.
 2. 여기서는 WAS(springboot) container 이름을 사용했다.
-
-
+3. **58001은 호스트 port가 아닌 "WAS의 내부" local port 이다!**
+4. (WAS Container에서 9090:58001으로 설정했다면 뒤에 내부 port이다.)
 
 
 
