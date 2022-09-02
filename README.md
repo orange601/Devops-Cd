@@ -1,21 +1,34 @@
-# 무중단 배포 #
-- Docker를 이용한 배포과정을 설명한다.
-- bash 프로그램을 이용하여 블루 그린 배포를 설정한다. 
+# CD #
+- 배포 자동화
+- 지속적인 서비스 제공(Continuous Delivery) 또는 지속적인 배포(Continuous Deployment)를 의미
 
-## 무중단 배포 방식 ##
+## 목표 ##
+- **블루 그린(Blue-Green Deployment) 배포**
+- Build 후 배포 과정을 설명한다.
+- Jenkins에서 gradle build를 통한 jar파일 생성 후 deploy.sh파일을 jenkins가 실행시켜 Nginx와 연결된 WAS(Springboot)를 변경시켜준다.
+
+## 무중단 배포 종류 ##
 - 롤링(Rolling Update) 방식
-- **블루 그린(Blue-Green Deployment) 방식**
+- 블루 그린(Blue-Green Deployment) 방식
 - 카나리(Canary Release) 방식
 
-## Docker-compose 이용한 설정 ##
-### Scenario ###
+## Scenario ##
 1. docker-compose 통한 Nginx 설치
 2. Nginx 브라우저 접속 확인
 3. default.conf 파일 수정 - service-url.inc 파일 생성
 4. 네트워크생성
-5. docker-compose 통한 java-spring image 생성
-6. 접속 확인
+5. docker-compose 통한 jdk 이미지 및 container 생성
+6. jdk container 접속 확인
 7. deploy.sh 작성
+
+## Nginx 설치 및 설정 ##
+- Docker Nginx 설치
+- docker-compose -p project_name up -d ( docker-compose.yml 위치에서 )
+- p: 프로젝트명 ( docker에서 관리할때 사용 )
+- f: docker-compose.yml를 설정 파일 사용. 다른 이름이나 다른 경로의 파일을 Docker Compose 설정 파일로 사용하고 싶다면 -f 옵션을 사용
+- d: background 실행
+
+## Docker-compose 이용한 설정 ##
 
 ### 주의사항 ###
 1. 웹훅
@@ -37,7 +50,7 @@
     - docker-compose -p proxy-server up
     - docker-compose -p dtd -f ./docker-compose.blue.yml up -d
     - p: 프로젝트 이름 
-    - f: docker-compose.yml를 설정 파일로 사용합니다. 다른 이름이나 경로의 파일을 Docker Compose 설정 파일로 사용하고 싶다면 -f 옵션으로 명시를 해줍니다.
+    
     - d: 백그라운드로 실행
     - 같은 이름의 프로젝트이면 container가 같은 그룹으로 생성된다. 
     - 프로젝트 이름을 설정하지않고 기본명령어만 사용할 경우 compose 그룹으로 생성된다.
