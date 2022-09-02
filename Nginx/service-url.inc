@@ -1,0 +1,1 @@
+set $service_url http://was-blue-prod1:50001;
