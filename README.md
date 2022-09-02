@@ -30,12 +30,43 @@
 $ docker-compose -p project_name up -d
 ````
 - p: 프로젝트명 ( docker에서 관리할때 사용 )
+- d: background 실행
 - f: 파일이름이 docker-compose.yml이 아닐 경우나 파일경로가 현재 경로에 없을 경우 사용한다.
 - 예) docker-compose -p dtd -f //docker-compose.blue.yml up -d
-- d: background 실행
 
-### 2. Nginx Proxy 설정 ### 
-- 
+
+### 2. Nginx Proxy 설정 ( reverse proxy ) ### 
+- /etc/nginx/conf.d/default.conf 파일 수정
+````
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+	include /etc/nginx/conf.d/service-url.inc;
+
+    location / {
+        #root   /usr/share/nginx/html;
+        #index  index.html index.htm;
+		resolver 127.0.0.11;
+		proxy_pass	$service_url;
+    }
+````
+- include /etc/nginx/conf.d/service-url.inc;
+- proxy_pass	$service_url;
+- resolver 127.0.0.11; 
+- resolver 확인은 아래 명령어로 확인한다.
+````
+$  cat /etc/resolv.conf
+````
+
+#### 같은위치에 service-url.inc 파일생성 ###
+````
+set $service_url http://was-blue-prod1:50001;
+````
+1. http 뒤에 container 이름을 사용한다.
+2. 여기서는 WAS(springboot) container 이름을 사용했다.
 
 
 
