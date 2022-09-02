@@ -8,7 +8,7 @@ services:
     container_name: nginx-proxy-server
     restart: on-failure
     ports:
-      - "30000:80"
+      - "21000:80"
     volumes:
       - 볼륨명:/sharing/
       - /var/lib/docker/volumes/볼륨명/_data/nginx/conf/:/etc/nginx/conf.d/
