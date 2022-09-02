@@ -6,6 +6,7 @@
 ## 목표 ##
 - **블루 그린(Blue-Green Deployment) 배포**
 - Jenkins의 webhook과 build 과정은 CI에서 관리한다.
+- [Jenkins를 통한 DEVOPS CI](https://github.com/orange601/devops-ci)
 
 ## Scenario ##
 1. bash를 명령어를 통한 deploy.sh 파일 실행
