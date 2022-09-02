@@ -1,1 +1,1 @@
-set $service_url http://was-blue-prod1:50001;
+set $service_url http://was-blue-prod1:67001;
