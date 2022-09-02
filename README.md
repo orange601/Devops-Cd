@@ -21,6 +21,23 @@
 6. jdk container 접속 확인
 7. deploy.sh 작성
 
+## 설치시 주의 사항 및 Troubleshooting시 가장먼저 확인해야 되는 부분 ##
+- Nginx 확인 
+1. default.conf 파일에서 service-url.inc의 파일위치가 맞는지 확인
+2. service-url.inc 파일과 default.conf의 변수명이 일치하는지 확인 ( $service_url ) 오타확인
+3. service-url.inc 파일에서 http뒤에 URL이 container 명이 맞는지 확인 ( http://was-container:9898; )
+	+ nginx에서 WAS(spring)으로 proxy를 전달해야 하므로 WAS container명과 일치하는지 확인
+4. service-url.inc 파일에서 포트(9898)가 내부port가 맞는지 확인 ( http://was-container:9898; )
+	+ WAS container의 내부 포트가 맞는지 확인
+	+ java의 compose 내용중 뒤에 오는 포트
+	+ 예)
+	````yml
+	services:
+	  was-prod1:	    
+	    ports:
+	      - "9090:58001"
+	````
+
 ## Nginx ##
 
 ### 1. docker-compose.yml 을 이용한 Nginx 설치 ### 
@@ -70,10 +87,21 @@ set $service_url http://was-blue-prod1:58001;
 3. **58001은 호스트 port가 아닌 "WAS의 내부" local port 이다!**
 4. (WAS Container에서 9090:58001으로 설정했다면 뒤에 내부 port이다.)
 
+## JAVA ##
+### 1. docker-compose.yml 을 이용한 설치 ### 
+- 아래는 docker-compose.blue.yml 이다.
+````yml
+version: '3.1'
 
-
-
-
+services:
+  was-blue-prod1:
+    image: adoptopenjdk/openjdk11:alpine-jre
+    container_name: was-blue-prod1 # service-url.inc의 container 이름과 같아야한다.
+    command: "java -jar /sharing/java/jar/app.jar"
+    ports:
+      - "9090:58001"
+````
+- container_name의 이름과 nginx에서 
 
 
 
