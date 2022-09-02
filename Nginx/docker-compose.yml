@@ -1,0 +1,23 @@
+# docker-compose -p 프로젝트명 up -d
+version: '3.1'
+
+services:
+  nginx-proxy-server:    
+    build: . # 현재위치의 dockerfile을 빌드한다. Dockerfile을 사용안할 경우 지워도 된다.
+    image: nginx:latest
+    container_name: nginx-proxy-server
+    restart: on-failure
+    ports:
+      - "30000:80"
+    volumes:
+      - 볼륨명:/sharing/
+      - /var/lib/docker/volumes/볼륨명/_data/nginx/conf/:/etc/nginx/conf.d/
+
+# Docker에서 Volume을 생성하면 Host(윈도우)의 \\wsl$\docker-desktop-data\data\docker\volumes\볼륨명\_data 위치에 생성된다.
+volumes:
+    볼륨명:
+
+networks:
+  default:
+    external:
+      name: was-network
