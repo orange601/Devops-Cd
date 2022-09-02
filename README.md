@@ -35,7 +35,7 @@
 	services:
 	  was-prod1:	    
 	    ports:
-	      - "9090:58001"
+	      - "9090:9898"
 	````
 
 ## Nginx ##
