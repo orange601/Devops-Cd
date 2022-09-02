@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  was-blue-prod1:
+    image: adoptopenjdk/openjdk11:alpine-jre
+    container_name: was-blue-prod1 # service-url.inc의 container 이름과 같아야한다.
+    restart: on-failure
+    command: "java -jar /sharing/java/jar/app.jar"
+    ports:
+      - "9090:58001"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod1"
+      - "SPRING_CONFIG_LOCATION=/sharing/java/was-prod1-prop/"
+    volumes:
+      - 볼륨명:/sharing/
+      - /var/lib/docker/volumes/볼륨명/_data/java/jar/:/sharing/java/jar/
+
+volumes:
+    볼륨명:
+
+networks:
+  default:
+    external:
+      name: was-network

@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  was-green-prod2:
+    image: adoptopenjdk/openjdk11:alpine-jre
+    container_name: was-green-prod2 # service-url.inc의 container 이름과 같아야한다.
+    restart: on-failure
+    command: "java -jar /sharing/java/jar/app.jar"
+    ports:
+      - "60002:50002"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod2"
+      - "SPRING_CONFIG_LOCATION=/sharing/java/was-prod2-prop/"
+    volumes:
+      - iaan_volume:/sharing/
+      - /var/lib/docker/volumes/dtd_v2_iaan_volume/_data/java/jar/:/sharing/java/jar/
+
+volumes:
+    iaan_volume:
+
+networks:
+  default:
+    external:
+      name: was-network
