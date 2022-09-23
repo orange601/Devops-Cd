@@ -98,4 +98,83 @@ services:
 - ports 설정에서 9090:58001 부분중 뒷 port(local port)가 service-url.inc 파일의 포트 부분과 일치하는지 확인
 
 
+````bash
+# 시나리오
+# 1. blue container가 실행여부 확인한다.
+# 2. container 정상구동 확인 - 핑 10번
+# 3. 정상확인시 service-url.inc에 포트변경 후 Nginx를 reload 시켜 80 port에 새로운 container를 바인딩
+# 4. 전에 구동되고 있던 container는 삭제
+
+PROJECT_NAME=dtd_v2
+COMPOSE_DIR=/sharing/java/compose
+NGINX_CONTAINER_NAME=nginx-proxy-server
+
+# 1. blue docker가 실행되고 있는지 확인
+EXIST_BLUE=$(docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_DIR}/docker-compose.blue.yml ps | grep Up)
+
+if [ -z "${EXIST_BLUE}" ]; then # -z는 문자열 길이가 0이면 true. Blue가 실행 중이지 않다는 의미.
+	echo "Blue Will RUN"
+	START_CONTAINER=blue
+	EXTENAL_START_PORT=60001
+	DOWN_CONTAINER=green
+	EXTERNAL_DOWN_PORT=60002
+	# 내부port
+	INSIDE_START_PORT=50001
+	INSIDE_DOWN_PORT=50002
+	START_PROFILE=prod1
+	DOWN_PROFILE=prod2
+else
+	echo "GREEN Will RUN"
+	START_CONTAINER=green
+	EXTENAL_START_PORT=60002
+	DOWN_CONTAINER=blue
+	EXTERNAL_DOWN_PORT=60001
+	# 내부port
+	INSIDE_START_PORT=50002
+	INSIDE_DOWN_PORT=50001
+	START_PROFILE=prod2
+	DOWN_PROFILE=prod1	
+fi
+
+docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_DIR}/docker-compose.${START_CONTAINER}.yml up -d
+
+# 2
+for cnt in {1..10} # 생성한 컨테이너 안에 Application이 정상적으로 구동되기까지 10번의 핑을 보내 확인한다.
+do
+	echo "check server start.."
+	
+	# host.docker.internal
+	UP=$(curl -s host.docker.internal:${EXTENAL_START_PORT}/smile/act/health | grep 'UP')
+	
+	if [ -z "${UP}" ]; then # -z는 문자열 길이가 0이면 true
+		sleep 10
+		continue       
+    else
+		break
+    fi
+done
+
+if [ $cnt -eq 10 ] # 10번동안 실행되지 않았다면, 배포실패, 종료
+then
+    echo "Deployment Failed."
+	docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_DIR}/docker-compose.${START_CONTAINER}.yml down
+    exit 1
+fi
+
+# 3 
+# sed 명령어를 이용해서  service-url.inc의 url값 변경
+# sed -i "s/기존문자열/변경할문자열" 파일경로 입니다. 여기서는 container의 내부(local)port를 사용하고 있음을 주의해야 합니다.
+DOWN_WAS=was-${DOWN_CONTAINER}-${DOWN_PROFILE}:${INSIDE_DOWN_PORT}
+START_WAS=was-${START_CONTAINER}-${START_PROFILE}:${INSIDE_START_PORT}
+sed -i "s/${DOWN_WAS}/${START_WAS}/" /sharing/nginx/conf/service-url.inc
+echo "Deploy Completed!!"
+
+# 4
+echo "${DOWN_CONTAINER}-Container:${EXTERNAL_DOWN_PORT} DOWN"
+# 오류가 났을때 down하지 않는 이유는 에러 로그를 확인하려고 down시키지 않는다.
+# docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_DIR}/docker-compose.${DOWN_CONTAINER}.yml down
+
+docker exec -i ${NGINX_CONTAINER_NAME} nginx -s reload
+````
+
 
