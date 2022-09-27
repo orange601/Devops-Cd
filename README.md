@@ -99,7 +99,6 @@ services:
 
 ## bash.sh ##
 ````bash
-# 시나리오
 # 1. blue container가 실행여부 확인한다.
 # 2. container 정상구동 확인 - 핑 10번
 # 3. 정상확인시 service-url.inc에 포트변경 후 Nginx를 reload 시켜 80 port에 새로운 container를 바인딩
