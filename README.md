@@ -97,7 +97,7 @@ services:
 - container_name의 이름과 nginx에서 service-url.inc 파일의 URL이 같은지 확인 ( set $service_url http://was-blue-prod1:50001; )
 - ports 설정에서 9090:58001 부분중 뒷 port(local port)가 service-url.inc 파일의 포트 부분과 일치하는지 확인
 
-
+## bash.sh ##
 ````bash
 # 시나리오
 # 1. blue container가 실행여부 확인한다.
