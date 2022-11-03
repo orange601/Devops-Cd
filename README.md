@@ -94,13 +94,13 @@
 > localhost:30000 
 
 
-	### Welcome to nginx! ###
-	If you see this page, the nginx web server is successfully installed and working. Further configuration is required.   
+### Welcome to nginx! ###
+If you see this page, the nginx web server is successfully installed and working. Further configuration is required.   
 
-	For online documentation and support please refer to nginx.org.   
-	Commercial support is available at nginx.com.   
+For online documentation and support please refer to nginx.org.   
+Commercial support is available at nginx.com.   
 
-	Thank you for using nginx.
+Thank you for using nginx.
 
 
 ### 6. Nginx Proxy 설정 ( reverse proxy ) ### 
