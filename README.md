@@ -138,6 +138,17 @@ server {
 $  cat /etc/resolv.conf
 ````
 
+### 5. Nginx Custom Iamge 만들기 ###
+- 컨테이너에서 작업한 내용들은 컨테이너가 종료되면 함께 사라진다.
+- 컨테이너에서 작업한 내용을 이미지로 커밋(Commit)하여 작업했던 내용을 다시 사용 할 수 있다.
+- commit 명령어를 통해 컨테이너 상태 그대로의 이미지 생성
+	> docker commit [CONTAINER ID] [IMAGE NAME]
+	````cmd
+	$ docker commit 1a0a902554ba jenkinsmake
+	````
+    
+    
+
 ### Nginx 명령어 ###
 - nginx container 실행
 	````cmd
