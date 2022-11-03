@@ -109,9 +109,7 @@ Thank you for using nginx.
 	````
 
 
-
-
-### 6. Nginx Proxy 설정 ( reverse proxy ) ### 
+### 4. Nginx Proxy 설정 ( reverse proxy ) ### 
 - /etc/nginx/conf.d/default.conf 파일 수정
 ````
 server {
