@@ -66,8 +66,8 @@
 	apt-get -y install vim
 	````
 	
-~~### 2. Volume 생성 ###
-~~- Host와 Container간 데이터 공유를 위해 미리 생성한다.
+### ~~2. Volume 생성 ###
+- ~~Host와 Container간 데이터 공유를 위해 미리 생성한다.
 
 	````cmd
 	$ docker volume create orange_volume
