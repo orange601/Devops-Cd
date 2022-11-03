@@ -47,7 +47,7 @@
 	    container_name: nginx-proxy-server
 	    restart: on-failure
 	    ports:
-	      - "12345:80"
+	      - "12345:80" # hostport : containerport 
 	    volumes:
 	      - orange_volume:/share/ # nginx에 share이라는 dir가 생성된다.
 
@@ -89,8 +89,11 @@
 - f: 파일이름이 docker-compose.yml이 아닐 경우나 파일경로가 현재 경로에 없을 경우 사용한다.
 - 예) docker-compose -p dtd -f //docker-compose.blue.yml up -d
 
+### 5. Nginx 실행확인 ###
+- compose에서 설정한 port로 접속한다.
+> localhost:30000 
 
-### 5. Nginx Proxy 설정 ( reverse proxy ) ### 
+### 6. Nginx Proxy 설정 ( reverse proxy ) ### 
 - /etc/nginx/conf.d/default.conf 파일 수정
 ````
 server {
