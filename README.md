@@ -157,7 +157,7 @@ services:
     image: adoptopenjdk/openjdk11:alpine-jre
     container_name: orange-was-blue # service-url.inc의 container 이름과 같아야한다.
     restart: on-failure
-    command: "java -jar /sharing/java/jar/app.jar --server.port=50001" # properties가 아닌 여기서 port 설정 이유는 아래에
+    command: "java -jar /sharing/java/jar/app.jar --server.port=50001" # properties가 아닌 여기서 port 설정한다. 이유는 아래에
     ports:
       - "60001:50001"
     environment:
@@ -174,7 +174,7 @@ networks:
       name: orange-network
       external: true
 ````
-- properties 파일에서 port를 설정해도 되지만 propeties 파일을 blue와 green이 똑같은 propeties를 사용하기 위해 실행기 port설정한다.
+- properties 파일에서 port를 설정해도 되지만 propeties 파일을 blue와 green이 똑같은 propeties를 사용하기 위해 실행시 port설정한다.
 - container_name의 이름과 nginx에서 service-url.inc 파일의 URL이 같은지 확인 ( set $service_url http://orange-was-blue:50001; )
 - ports 설정에서 60001:50001 부분중 뒷 port(local port)가 service-url.inc 파일의 포트 부분과 일치하는지 확인
 
