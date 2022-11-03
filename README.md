@@ -49,7 +49,7 @@
 	    ports:
 	      - "12345:80"
 	    volumes:
-	      - orange_volume:/share/
+	      - orange_volume:/share/ # nginx에 share이라는 dir가 생성된다.
 
 	volumes:
 	    orange_volume:
