@@ -66,22 +66,11 @@
 	apt-get -y install vim
 	````
 	
-### ~~2. Volume 생성 ###
-- ~~Host와 Container간 데이터 공유를 위해 미리 생성한다.
 
-	````cmd
-	$ docker volume create orange_volume
-	````
-- compose를 실행하면 자동으로 생성된다. 
-- 자동생성될때 volume 이름앞에 프로젝트이름이 접두어로 사용되기때문에 미리 만들어두면 헷갈린다.
 
-### 3. 외부 네트워크 생성 ###
-- 통신을 위해 Network를 생성한다.
-	````yml
-	$ docker network create your-orange-network
-	````
 
-### 4. Nginx 설치 ### 
+
+### 2. Nginx 설치 ### 
 - docker-compose.yml 위치에서 아래 명령어를 실행한다.
 
 	````docker
@@ -92,10 +81,24 @@
 - f: 파일이름이 docker-compose.yml이 아닐 경우나 파일경로가 현재 경로에 없을 경우 사용한다.
 - 예) docker-compose -p dtd -f //docker-compose.blue.yml up -d
 
-### 5. Nginx 실행확인 ###
+### 3. Nginx 실행확인 ###
 - compose에서 설정한 port로 접속한다.
 > localhost:30000 
 
+### Volume 생성 ###
+- compose를 실행하면 자동으로 생성된다. 
+- 자동생성될때 volume 이름앞에 프로젝트이름이 접두어로 사용되기때문에 미리 만들어두면 헷갈린다.
+
+	````cmd
+	$ docker volume create orange_volume
+	````
+
+### 네트워크 생성 ###
+- 통신을 위해 Network를 생성한다.
+
+	````yml
+	$ docker network create your-orange-network
+	````
 
 ### Welcome to nginx! ###
 If you see this page, the nginx web server is successfully installed and working. Further configuration is required.   
