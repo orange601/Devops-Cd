@@ -32,26 +32,65 @@
 	````
 
 ## Nginx ##
+### 1. nginx 이미지와 container 설치하기 위해 docker-compose.yml를 작성한다. ###
+- docker-compose.yml 작성 후 적당한 위치에 두고 같은 위치에 Dockerfile도 작성한다.
+- 사실 Dockerfile 없이 docker-compose.yml 하나로 설치가 가능하나 가독성을 위해(내생각) 작성한다.
 
-### 0. 외부 네트워크 생성 ###
-- 같은 network 통신을 위해 Network를 생성한다.
 	````yml
-	$ docker network create custom_networkd
+	# docker-compose.yml
+	version: '3.1'
+
+	services:
+	  nginx-proxy-server:    
+	    build: . # 현재위치에 있는 dockerfile을 빌드한다.
+	    image: nginx:latest
+	    container_name: nginx-proxy-server
+	    restart: on-failure
+	    ports:
+	      - "12345:80"
+	    volumes:
+	      - orange_volume:/share/
+
+	volumes:
+	    orange_volume:
+
+	networks:
+	  default:
+	    external:
+	      name: your-orange-network
+	````
+	````yml
+	# Dockerfile
+	FROM nginx:latest
+	RUN apt-get update && \
+	apt-get -y install vim
+	````
+	
+### 2. Volume 생성 ###
+- Host와 Container간 데이터 공유를 위해 미리 생성한다.
+
+	````cmd
+	$ docker volume create orange_volume
+	````
+### 3. 외부 네트워크 생성 ###
+- 통신을 위해 Network를 생성한다.
+	````yml
+	$ docker network create your-orange-network
 	````
 
-### 1. docker-compose.yml 을 이용한 Nginx 설치 ### 
-- docker-compose 명령을 이용해서 nginx 이미지와 container 설치
+### 4. Nginx 설치 ### 
 - docker-compose.yml 위치에서 아래 명령어를 실행한다.
-````docker
-$ docker-compose -p project_name up -d
-````
+
+	````docker
+	$ docker-compose -p project_name up -d
+	````
 - p: 프로젝트명 ( docker에서 관리할때 사용 )
 - d: background 실행
 - f: 파일이름이 docker-compose.yml이 아닐 경우나 파일경로가 현재 경로에 없을 경우 사용한다.
 - 예) docker-compose -p dtd -f //docker-compose.blue.yml up -d
 
 
-### 2. Nginx Proxy 설정 ( reverse proxy ) ### 
+### 5. Nginx Proxy 설정 ( reverse proxy ) ### 
 - /etc/nginx/conf.d/default.conf 파일 수정
 ````
 server {
