@@ -135,6 +135,21 @@ server {
 $  cat /etc/resolv.conf
 ````
 
+### Nginx 명령어 ###
+- nginx container 실행
+	````cmd
+	$ docker start container_name
+	````
+- Restart
+	````cmd
+	sudo service nginx restart
+	````
+
+- Reload
+	````cmd
+	nginx -s reload
+	````
+
 #### 같은위치에 service-url.inc 파일생성 ###
 ````
 set $service_url http://was-blue-prod1:58001;
