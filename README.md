@@ -93,7 +93,7 @@
 - compose에서 설정한 port로 접속한다.
 > localhost:30000 
 
-	````
+
 	### Welcome to nginx! ###
 	If you see this page, the nginx web server is successfully installed and working. Further configuration is required.   
 
@@ -101,7 +101,7 @@
 	Commercial support is available at nginx.com.   
 
 	Thank you for using nginx.
-	````
+
 
 ### 6. Nginx Proxy 설정 ( reverse proxy ) ### 
 - /etc/nginx/conf.d/default.conf 파일 수정
