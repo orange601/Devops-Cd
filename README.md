@@ -9,10 +9,13 @@
 - [Jenkins를 통한 DEVOPS CI](https://github.com/orange601/devops-ci)
 
 ## Scenario ##
-1. bash를 명령어를 통한 deploy.sh 파일 실행
-2. service-url.inc의 URL과 port가 변경된다.
-3. docker-compose.blue.yml 과 docker-compose.green.yml이 번갈아가면서 실행된다.
-4. Nginx로 접속시 blue 혹은 green으로 접속한다.
+1. github push 이벤트 발생
+2. webhook을 통해 jenkins에 이벤트 push 전달
+3. jenkis에서 gradle 통해 github 소스 build 후 jar 생성
+4. Execute shell 이벤트를 통해 bash를 명령어로 deploy.sh 파일 실행
+	````cmd
+	$ bash /sharing/bash/deploy.sh
+	````
 
 ## 설치시 주의 사항 및 Troubleshooting시 가장먼저 확인해야 되는 부분 ##
 - Nginx 확인 
