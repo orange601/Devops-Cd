@@ -33,6 +33,12 @@
 
 ## Nginx ##
 
+### 0. 외부 네트워크 생성 ###
+- 같은 network 통신을 위해 Network를 생성한다.
+	````yml
+	$ docker network create custom_networkd
+	````
+
 ### 1. docker-compose.yml 을 이용한 Nginx 설치 ### 
 - docker-compose 명령을 이용해서 nginx 이미지와 container 설치
 - docker-compose.yml 위치에서 아래 명령어를 실행한다.
