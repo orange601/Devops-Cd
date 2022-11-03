@@ -85,6 +85,14 @@
 - compose에서 설정한 port로 접속한다.
 > localhost:30000 
 
+### Welcome to nginx! ###
+If you see this page, the nginx web server is successfully installed and working. Further configuration is required.   
+
+For online documentation and support please refer to nginx.org.   
+Commercial support is available at nginx.com.   
+
+Thank you for using nginx.
+
 ### Volume 생성 ###
 - compose를 실행하면 자동으로 생성된다. 
 - 자동생성될때 volume 이름앞에 프로젝트이름이 접두어로 사용되기때문에 미리 만들어두면 헷갈린다.
@@ -100,13 +108,7 @@
 	$ docker network create your-orange-network
 	````
 
-### Welcome to nginx! ###
-If you see this page, the nginx web server is successfully installed and working. Further configuration is required.   
 
-For online documentation and support please refer to nginx.org.   
-Commercial support is available at nginx.com.   
-
-Thank you for using nginx.
 
 
 ### 6. Nginx Proxy 설정 ( reverse proxy ) ### 
