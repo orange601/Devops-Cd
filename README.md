@@ -66,12 +66,15 @@
 	apt-get -y install vim
 	````
 	
-### 2. Volume 생성 ###
-- Host와 Container간 데이터 공유를 위해 미리 생성한다.
+~~### 2. Volume 생성 ###
+~~- Host와 Container간 데이터 공유를 위해 미리 생성한다.
 
 	````cmd
 	$ docker volume create orange_volume
 	````
+- compose를 실행하면 자동으로 생성된다. 
+- 자동생성될때 volume 이름앞에 프로젝트이름이 접두어로 사용되기때문에 미리 만들어두면 헷갈린다.
+
 ### 3. 외부 네트워크 생성 ###
 - 통신을 위해 Network를 생성한다.
 	````yml
