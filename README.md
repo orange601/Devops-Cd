@@ -153,15 +153,29 @@ set $service_url http://was-blue-prod1:58001;
 version: '3.1'
 
 services:
-  was-blue-prod1:
+  orange-was-blue:
     image: adoptopenjdk/openjdk11:alpine-jre
-    container_name: was-blue-prod1 # service-url.inc의 container 이름과 같아야한다.
+    container_name: orange-was-blue # service-url.inc의 container 이름과 같아야한다.
+    restart: on-failure
     command: "java -jar /sharing/java/jar/app.jar"
     ports:
-      - "9090:58001"
+      - "60001:50001"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+      - "SPRING_CONFIG_LOCATION=/sharing/java/prop/"
+    volumes:
+      - orange_volume:/sharing/
+
+volumes:
+    orange_volume:
+
+networks:
+  default:
+      name: orange-network
+      external: true
 ````
-- container_name의 이름과 nginx에서 service-url.inc 파일의 URL이 같은지 확인 ( set $service_url http://was-blue-prod1:50001; )
-- ports 설정에서 9090:58001 부분중 뒷 port(local port)가 service-url.inc 파일의 포트 부분과 일치하는지 확인
+- container_name의 이름과 nginx에서 service-url.inc 파일의 URL이 같은지 확인 ( set $service_url http://orange-was-blue:50001; )
+- ports 설정에서 60001:50001 부분중 뒷 port(local port)가 service-url.inc 파일의 포트 부분과 일치하는지 확인
 
 ## bash.sh ##
 ````bash
