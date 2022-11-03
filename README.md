@@ -150,9 +150,10 @@ $  cat /etc/resolv.conf
 ````cmd
 $ docker ps -a
 ````
-
-CONTAINER ID   IMAGE               COMMAND       CREATED        STATUS                    PORTS     NAMES
-1a0a902554ba   ubuntu:16.04        "/bin/bash"   9 days ago     Exited (0) 6 days ago               containernam
+>
+> CONTAINER ID   IMAGE               COMMAND       CREATED        STATUS                    PORTS     NAMES
+> 1a0a902554ba   ubuntu:16.04        "/bin/bash"   9 days ago     Exited (0) 6 days ago               containernam
+>
 
 ### Nginx 명령어 ###
 - nginx container 실행
