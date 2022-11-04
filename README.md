@@ -212,6 +212,12 @@ networks:
 - ports 설정에서 60001:50001 부분중 뒷 port(local port)가 service-url.inc 파일의 포트 부분과 일치하는지 확인
 
 ## bash.sh ##
+- 윈도우에서 bash 프로그램을 수정하기 위해선 editor를 UNIX 형식으로 변환해야 한다.
+- Windows와 UNIX의 끝줄 처리 방식이 다르기 때문이다. ( 줄바꿈 문자를 Windows에서는 \n\r을 사용하고, UNIX에서는 \n을 사용 )
+- Notepad++ 를 이용해서 bash 프로그램을 수정할 계획이기때문에 Notepad의 옵션을 변경해야 한다.
+- 편집 > 줄의 끝문자(EOL) 변환 > Unix 형식으로 변환
+
+
 ````bash
 # 1. blue container가 실행여부 확인한다.
 # 2. container 정상구동 확인 - 핑 10번
