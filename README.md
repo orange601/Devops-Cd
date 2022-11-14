@@ -40,15 +40,14 @@
 - 사실 Dockerfile 없이 docker-compose.yml 하나로 설치가 가능하나 가독성을 위해(내생각) 작성한다.
 
 	````yml
-	# docker-compose.yml
 	version: '3.1'
 
 	services:
-	  nginx-proxy-server:    
+	  nginx-proxy-server:
 	    build: . # 현재위치에 있는 dockerfile을 빌드한다.
 	    image: nginx:latest
 	    container_name: nginx-proxy-server
-	    restart: on-failure
+	    restart: on-failure # 실패시 재실행
 	    ports:
 	      - "12345:80" # hostport : containerport 
 	    volumes:
