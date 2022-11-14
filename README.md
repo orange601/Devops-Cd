@@ -138,6 +138,15 @@ server {
 $  cat /etc/resolv.conf
 ````
 
+#### 같은위치에 service-url.inc 파일생성 ###
+````
+set $service_url http://was-blue-prod1:58001;
+````
+1. http 뒤에 container 이름을 사용한다.
+2. 여기서는 WAS(springboot) container 이름을 사용했다.
+3. **58001은 호스트 port가 아닌 "WAS의 내부" local port 이다!**
+4. (WAS Container에서 9090:58001으로 설정했다면 뒤에 내부 port이다.)
+
 ### 5. Nginx Custom Iamge 만들기 ###
 - 컨테이너에서 작업한 내용들은 컨테이너가 종료되면 함께 사라진다.
 - 컨테이너에서 작업한 내용을 이미지로 커밋(Commit)하여 작업했던 내용을 다시 사용 할 수 있다.
@@ -169,15 +178,6 @@ CONTAINER ID   IMAGE               COMMAND       CREATED        STATUS          
 	````cmd
 	nginx -s reload
 	````
-
-#### 같은위치에 service-url.inc 파일생성 ###
-````
-set $service_url http://was-blue-prod1:58001;
-````
-1. http 뒤에 container 이름을 사용한다.
-2. 여기서는 WAS(springboot) container 이름을 사용했다.
-3. **58001은 호스트 port가 아닌 "WAS의 내부" local port 이다!**
-4. (WAS Container에서 9090:58001으로 설정했다면 뒤에 내부 port이다.)
 
 ## JAVA ##
 ### 1. docker-compose.yml 을 이용한 설치 ### 
