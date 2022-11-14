@@ -58,8 +58,8 @@
 
 	networks:
 	  default:
-	    external:
-	      name: your-orange-network
+	  	name: your-orange-network
+		external: true
 	````
 	````yml
 	# Dockerfile
@@ -145,6 +145,8 @@ set $service_url http://was-blue-prod1:58001;
 2. 여기서는 WAS(springboot) container 이름을 사용했다.
 3. **58001은 호스트 port가 아닌 "WAS의 내부" local port 이다!**
 4. (WAS Container에서 9090:58001으로 설정했다면 뒤에 내부 port이다.)
+5. 언더바 사용시 JAVA에서 URL인식 에러가 발생한다.
+	- the character is never valid in a domain name
 
 ### 5. Nginx Custom Iamge 만들기 ###
 - 컨테이너에서 작업한 내용들은 컨테이너가 종료되면 함께 사라진다.
@@ -185,7 +187,7 @@ CONTAINER ID   IMAGE               COMMAND       CREATED        STATUS          
 version: '3.1'
 
 services:
-  orange-was-blue:
+  orange-was-blue: # 언더바를 사용하면 Nginx에서 URL인식 에러가 발생한다.
     image: adoptopenjdk/openjdk11:alpine-jre
     container_name: orange-was-blue # service-url.inc의 container 이름과 같아야한다.
     restart: on-failure
