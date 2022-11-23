@@ -8,6 +8,9 @@
 - Jenkins의 webhook과 build 과정은 CI에서 관리한다.
 - [Jenkins를 통한 DEVOPS CI](https://github.com/orange601/devops-ci)
 
+## 방화벽 ##
+- SPRING(Docker) 방화벽을 열어야 bash를 실행시키는 CI툴(JENKINS)에서 접근이 가능하다.
+
 ## Scenario ##
 1. github push 이벤트 발생
 2. webhook을 통해 jenkins에 이벤트 push 전달
