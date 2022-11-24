@@ -20,22 +20,7 @@
 	$ bash /sharing/bash/deploy.sh
 	````
 
-## 설치시 주의 사항 및 Troubleshooting시 가장먼저 확인해야 되는 부분 ##
-- Nginx 확인 
-1. default.conf 파일에서 service-url.inc의 파일위치가 맞는지 확인
-2. service-url.inc 파일과 default.conf의 변수명이 일치하는지 확인 ( $service_url ) 오타확인
-3. service-url.inc 파일에서 http뒤에 URL이 container 명이 맞는지 확인 ( http://was-container:9898; )
-	+ nginx에서 WAS(spring)으로 proxy를 전달해야 하므로 WAS container명과 일치하는지 확인
-4. service-url.inc 파일에서 포트(9898)가 내부port가 맞는지 확인 ( http://was-container:9898; )
-	+ WAS container의 내부 포트가 맞는지 확인
-	+ java의 compose 내용중 뒤에 오는 포트
-	+ 예)
-	````yml
-	services:
-	  was-prod1:	    
-	    ports:
-	      - "9090:9898"
-	````
+
 
 ## Nginx ##
 ### 1. nginx 이미지와 container 설치하기 위해 docker-compose.yml를 작성한다. ###
@@ -300,4 +285,21 @@ echo "${DOWN_CONTAINER}-Container:${EXTERNAL_DOWN_PORT} DOWN"
 docker exec -i ${NGINX_CONTAINER_NAME} nginx -s reload
 ````
 
+
+## Troubleshooting ##
+- Nginx 확인 
+1. default.conf 파일에서 service-url.inc의 파일위치가 맞는지 확인
+2. service-url.inc 파일과 default.conf의 변수명이 일치하는지 확인 ( $service_url ) 오타확인
+3. service-url.inc 파일에서 http뒤에 URL이 container 명이 맞는지 확인 ( http://was-container:9898; )
+	+ nginx에서 WAS(spring)으로 proxy를 전달해야 하므로 WAS container명과 일치하는지 확인
+4. service-url.inc 파일에서 포트(9898)가 내부port가 맞는지 확인 ( http://was-container:9898; )
+	+ WAS container의 내부 포트가 맞는지 확인
+	+ java의 compose 내용중 뒤에 오는 포트
+	+ 예)
+	````yml
+	services:
+	  was-prod1:	    
+	    ports:
+	      - "9090:9898"
+	````
 
