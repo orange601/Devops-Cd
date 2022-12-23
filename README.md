@@ -46,7 +46,7 @@
 
 	networks:
 	  default:
-	  	name: your-orange-network
+	  	name: your-orange-network # 네트워크가 생성되어 있어야 한다.
 		external: true
 	````
 	````yml
